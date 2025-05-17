@@ -46,4 +46,11 @@ public abstract class Contract {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public abstract double getTotalPrice();
+
+
+    public abstract double getMonthlyPayment();
+
+
 }
