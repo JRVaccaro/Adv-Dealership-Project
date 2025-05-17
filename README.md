@@ -8,25 +8,12 @@
 
 ## User Stories
 
-- As a user, I want to search for vehicles within a customer's price range so that I can show them affordable options
+- As a user, I want to record a sale so that I can track what vehicle was sold, to whom, and for how much.
 
-- As a user, I want to search for vehicles by make and model, so that I can help customers find the exact type of car they’re looking for.
+- As a user, I want record a lease so that I can track lease agreements, and customer obligations.
 
-- As a user, I want to find vehicles by year range, so I can help customers find cars that meet their preferences.
+- As a user, I want to review contracts so that I have a record of all transactions
 
-- As a user, I want to search for vehicles by color, so that I can help customers find cars that match their preferences.
-
-- As a user, I want to search for vehicles by mileage range, so that I can help customers find cars with mileage that fits their expectations.
-
-- As a user, I want to search vehicles by type so that I can help customers find cars that match their preferences.
-
-- As a user, I want to view all vehicles so that I can see the entire inventory.
-
-- As a user, I want the option to add a vehicle so that I can keep the inventory up to date.
-
-- As a user, I want the option to remove a vehicle so that I can keep the inventory up to date.
-
-- As a user, I want the option to quit the application so that I can exit the program when I'm finished using it.
 ## Setup
 **Using the Application**
 You will be prompted to pick from the following:
