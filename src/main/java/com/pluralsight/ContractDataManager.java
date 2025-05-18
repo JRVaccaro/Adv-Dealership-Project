@@ -15,7 +15,7 @@ public class ContractDataManager {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("contracts.csv", true))) {
             //if file is empty, write header row
             if (fileEmpty){
-                writer.write("TYPE|DATE|NAME|VIN|MAKE|MODEL|TYPE|COLOR|ODOMETER|PRICE|SALES_TAX|RECORDING_FEE|FINANCE|MONTHLY_PAYMENT\n");
+                writer.write("TYPE|DATE|NAME|EMAIL|VIN|MAKE|MODEL|TYPE|COLOR|ODOMETER|PRICE|SALES_TAX|RECORDING_FEE|FINANCE|MONTHLY_PAYMENT|ENDING_VALUE|LEASE_FEE\n");
             }
             //checking if contract is a SalesContract instance
             if (contract instanceof SalesContract) {
@@ -34,6 +34,16 @@ public class ContractDataManager {
 
             } else if (contract instanceof LeaseContract) {
                 LeaseContract lease = (LeaseContract) contract;
+                writer.write("LEASE|%s|%s|%s|%s|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%.2f\n".formatted(
+                        lease.getDate(),
+                        lease.getCustomerName(),
+                        lease.getCustomerEmail(),
+                        lease.getVehicle().getVin(), lease.getVehicle().getYear(),
+                        lease.getVehicle().getMake(), lease.getVehicle().getModel(),
+                        lease.getVehicle().getVehicleType(), lease.getVehicle().getColor(),
+                        lease.getVehicle().getOdometer(), lease.getVehicle().getPrice(),
+                        lease.getExpectedEndingValue(), lease.getLeaseFee(), lease.getTotalPrice(),
+                        lease.getMonthlyPayment()));
 
             }
 
