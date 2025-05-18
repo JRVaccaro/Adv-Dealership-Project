@@ -241,7 +241,23 @@ public class UserInterface {
             SalesContract salesContract = new SalesContract(date, name, email, foundVin, salesTaxAmount, recordingFee, processingFee, financeOption);
 
             ContractDataManager.saveContract(salesContract);
+            //Remove vehicle after sale
+            dealership.removeVehicle(foundVin);
+            //Adding the change
+            new DealershipFileManager().saveDealership(dealership);
             System.out.println("Sale contract has been created.");
+
+        } else if (contractType.equalsIgnoreCase("Lease")) {
+            LeaseContract leaseContract = new LeaseContract(date, name, email, foundVin);
+
+            ContractDataManager.saveContract(leaseContract);
+            dealership.removeVehicle(foundVin);
+            new DealershipFileManager().saveDealership(dealership);
+
+            System.out.println("Lease contract has been created.");
+
+        } else {
+            System.out.println("Invalid contract type. Please enter 'Sale' or 'Lease'.");
         }
     }
 
