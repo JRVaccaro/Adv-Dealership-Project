@@ -225,6 +225,24 @@ public class UserInterface {
             System.out.println("Vehicle not found");
             return;
         }
+        if (contractType.equalsIgnoreCase("Sale")){
+            System.out.println("Enter sales tax amount: ");
+            double salesTaxAmount = Double.parseDouble(scanner.nextLine().trim());
+
+            System.out.println("Enter recording fee: ");
+            double recordingFee = Double.parseDouble(scanner.nextLine().trim());
+
+            System.out.println("Enter the processing fee:");
+            double processingFee = Double.parseDouble(scanner.nextLine().trim());
+
+            System.out.println("Is customer using financing option? (yes or no): ");
+            boolean financeOption = scanner.nextLine().trim().equalsIgnoreCase("yes");
+
+            SalesContract salesContract = new SalesContract(date, name, email, foundVin, salesTaxAmount, recordingFee, processingFee, financeOption);
+
+            ContractDataManager.saveContract(salesContract);
+            System.out.println("Sale contract has been created.");
+        }
     }
 
 }
