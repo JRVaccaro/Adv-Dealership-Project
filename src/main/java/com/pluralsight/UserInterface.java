@@ -26,6 +26,7 @@ public class UserInterface {
             System.out.println("7. Get all vehicles");
             System.out.println("8. Add vehicle");
             System.out.println("9. Remove vehicle");
+            System.out.println("10. Make a Sale or Lease Contract");
             System.out.println("99. Quit");
 
             System.out.print("Enter your choice: ");
@@ -58,6 +59,9 @@ public class UserInterface {
                     break;
                 case "9":
                     processRemoveVehicleRequest();
+                    break;
+                case "10":
+                    processMakeContractRequest();
                     break;
                 case "99":
                     quit = true;
@@ -192,6 +196,22 @@ public class UserInterface {
         for (Vehicle vehicle : vehicles) {
             System.out.println(vehicle.toString());
         }
+    }
+    public void processMakeContractRequest(){
+        System.out.println("Enter the contract type, being either Sale or Lease: ");
+        String contractType = scanner.nextLine().trim();
+
+        System.out.println("Enter start of contract date. (YYYY-MM-dd:) ");
+        String date = scanner.nextLine().trim();
+
+        System.out.println("Enter Customer's name: ");
+        String name = scanner.nextLine().trim();
+
+        System.out.println("Enter Customer's email: ");
+        String email = scanner.nextLine().trim();
+
+        System.out.println("Enter Vehicle VIN: ");
+        int vin = Integer.parseInt(scanner.nextLine().trim());
     }
 
 }
