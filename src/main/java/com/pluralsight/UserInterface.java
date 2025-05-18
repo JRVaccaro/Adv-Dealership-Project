@@ -212,6 +212,19 @@ public class UserInterface {
 
         System.out.println("Enter Vehicle VIN: ");
         int vin = Integer.parseInt(scanner.nextLine().trim());
+
+        //Finding vehicle by VIN
+        Vehicle foundVin = null;
+        for (Vehicle vehicle : dealership.getAllVehicles()){
+            if (vehicle.getVin() == vin){
+                foundVin = vehicle;
+                break;
+            }
+        }
+        if (foundVin == null){
+            System.out.println("Vehicle not found");
+            return;
+        }
     }
 
 }
