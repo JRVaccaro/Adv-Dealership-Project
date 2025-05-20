@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
@@ -197,68 +198,78 @@ public class UserInterface {
             System.out.println(vehicle.toString());
         }
     }
-    public void processMakeContractRequest(){
-        System.out.println("Enter the contract type, being either Sale or Lease: ");
-        String contractType = scanner.nextLine().trim();
+    public void processMakeContractRequest() {
+        try {
+            System.out.println("Enter the contract type, being either Sale or Lease: ");
 
-        System.out.println("Enter start of contract date. (YYYY-MM-dd:) ");
-        String date = scanner.nextLine().trim();
+            String contractType = scanner.nextLine().trim();
 
-        System.out.println("Enter Customer's name: ");
-        String name = scanner.nextLine().trim();
+            System.out.println("Enter start of contract date. (YYYY-MM-dd:) ");
+            String date = scanner.nextLine().trim();
 
-        System.out.println("Enter Customer's email: ");
-        String email = scanner.nextLine().trim();
+            System.out.println("Enter Customer's name: ");
+            String name = scanner.nextLine().trim();
 
-        System.out.println("Enter Vehicle VIN: ");
-        int vin = Integer.parseInt(scanner.nextLine().trim());
+            System.out.println("Enter Customer's email: ");
+            String email = scanner.nextLine().trim();
 
-        //Finding vehicle by VIN
-        Vehicle foundVin = null;
-        for (Vehicle vehicle : dealership.getAllVehicles()){
-            if (vehicle.getVin() == vin){
-                foundVin = vehicle;
-                break;
+            System.out.println("Enter Vehicle VIN: ");
+            int vin = Integer.parseInt(scanner.nextLine().trim());
+
+            //Finding vehicle by VIN
+            Vehicle foundVin = null;
+            for (Vehicle vehicle : dealership.getAllVehicles()) {
+                if (vehicle.getVin() == vin) {
+                    foundVin = vehicle;
+                    break;
+                }
             }
-        }
-        if (foundVin == null){
-            System.out.println("Vehicle not found");
-            return;
-        }
-        if (contractType.equalsIgnoreCase("Sale")){
-            System.out.println("Enter sales tax amount: ");
-            double salesTaxAmount = Double.parseDouble(scanner.nextLine().trim());
+            if (foundVin == null) {
+                System.out.println("Vehicle not found");
+                return;
+            }
+            if (contractType.equalsIgnoreCase("Sale")) {
+                System.out.println("Enter sales tax amount: ");
+                double salesTaxAmount = Double.parseDouble(scanner.nextLine().trim());
 
-            System.out.println("Enter recording fee: ");
-            double recordingFee = Double.parseDouble(scanner.nextLine().trim());
+                System.out.println("Enter recording fee: ");
+                double recordingFee = Double.parseDouble(scanner.nextLine().trim());
 
-            System.out.println("Enter the processing fee:");
-            double processingFee = Double.parseDouble(scanner.nextLine().trim());
+                System.out.println("Enter the processing fee:");
+                double processingFee = Double.parseDouble(scanner.nextLine().trim());
 
-            System.out.println("Is customer using financing option? (yes or no): ");
-            boolean financeOption = scanner.nextLine().trim().equalsIgnoreCase("yes");
+                System.out.println("Is customer using financing option? (yes or no): ");
+                boolean financeOption = scanner.nextLine().trim().equalsIgnoreCase("yes");
 
-            SalesContract salesContract = new SalesContract(date, name, email, foundVin, salesTaxAmount, recordingFee, processingFee, financeOption);
+                SalesContract salesContract = new SalesContract(date, name, email, foundVin, salesTaxAmount, recordingFee, processingFee, financeOption);
 
-            ContractDataManager.saveContract(salesContract);
-            //Remove vehicle after sale
-            dealership.removeVehicle(foundVin);
-            //Adding the change
-            new DealershipFileManager().saveDealership(dealership);
-            System.out.println("Sale contract has been created.");
+                ContractDataManager.saveContract(salesContract);
+                //Remove vehicle after sale
+                dealership.removeVehicle(foundVin);
+                //Adding the change
+                new DealershipFileManager().saveDealership(dealership);
+                System.out.println("Sale contract has been created.");
 
-        } else if (contractType.equalsIgnoreCase("Lease")) {
-            LeaseContract leaseContract = new LeaseContract(date, name, email, foundVin);
+            } else if (contractType.equalsIgnoreCase("Lease")) {
+                int currentYear = LocalDateTime.now().getYear();
+                int vehicleAge = currentYear - foundVin.getYear();
 
-            ContractDataManager.saveContract(leaseContract);
-            dealership.removeVehicle(foundVin);
-            new DealershipFileManager().saveDealership(dealership);
+                if (vehicleAge > 3) {
+                    System.out.println("Lease contracts cannot be for vehicles older than 3 years old.");
+                    return;
+                }
 
-            System.out.println("Lease contract has been created.");
+                LeaseContract leaseContract = new LeaseContract(date, name, email, foundVin);
 
-        } else {
-            System.out.println("Invalid contract type. Please enter 'Sale' or 'Lease'.");
+                ContractDataManager.saveContract(leaseContract);
+                dealership.removeVehicle(foundVin);
+                new DealershipFileManager().saveDealership(dealership);
+
+                System.out.println("Lease contract has been created.");
+
+            }
+        } catch (Exception e) {
+            System.out.println("An error has occurred.");
         }
     }
-
 }
