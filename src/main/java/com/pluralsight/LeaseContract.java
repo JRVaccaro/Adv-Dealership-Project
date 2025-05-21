@@ -38,8 +38,12 @@ public class LeaseContract extends Contract {
     @Override
     public double getMonthlyPayment() {
         int numberOfPayments = 36;
+        //monthly interest rate(4% annually)
         double interestRate = 4.0 / 1200;
+        //calculating monthly payment with loan formula. Spreads Total price over 36 months with 4% interest
         double monthlyPayment = getTotalPrice() * (interestRate * Math.pow(1 + interestRate, numberOfPayments)) / (Math.pow(1 + interestRate, numberOfPayments) - 1);
+
+        //Rounding to two decimal places
         monthlyPayment = Math.round(monthlyPayment * 100);
         monthlyPayment /= 100;
         return monthlyPayment;

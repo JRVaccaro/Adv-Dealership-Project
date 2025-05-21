@@ -2,8 +2,17 @@
 
 ## Description of the Project
 
-- This is a simple Java console app that helps a car dealership keep track of its vehicle inventory. You can search for cars by things like price, make/model, year, color, mileage, or type. It also lets you list all cars, add new ones, or remove ones that are sold. The app loads the dealership info from a CSV file when it starts and saves any changes back to the file.
+This is a simple Java console application designed to help a car dealership manage its vehicle inventory. Users can:
 
+- Search for vehicles by price, make/model, year, color, mileage, or type
+
+- View all vehicles in the inventory
+
+- Add new vehicles
+
+- Remove sold vehicles
+
+The app loads dealership data from a CSV file at startup and saves all changes back to the file. It also supports creating Sale and Lease contracts, updating inventory accordingly.
 
 
 ## User Stories
@@ -26,8 +35,9 @@ You will be prompted to pick from the following:
 - 6: Find vehicles by type.
 - 7: List all vehicles.
 - 8: Add a vehicle.
-- 9: Remove a vehicle
-- 99: Exit
+- 9: Remove a vehicle.
+- 10: Make contract sale.
+- 99: Exit.
 
 ### Prerequisites
 
@@ -50,7 +60,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 - Intellij IDEA
 
 ## Demo
-
+![Gif.gif](Gif%20Folder/Gif.gif)
 
 ## Future Work
 

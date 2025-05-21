@@ -55,6 +55,7 @@ public class SalesContract extends Contract {
     public double getMonthlyPayment() {
         int numberOfPayments = 0;
         double interestRate = 0;
+        //determine loan terms based on vehicle price
         if (financeOption) {
             if (getVehicle().getPrice() >= 10000) { //changed it from getVehicleSold()
                 numberOfPayments = 48;
@@ -64,7 +65,10 @@ public class SalesContract extends Contract {
                 interestRate = 5.25 / 1200;
             }
 
+
+            //calculate monthly payment using loan formula
             double monthlyPayment = getTotalPrice() * (interestRate * Math.pow(1 + interestRate, numberOfPayments)) / (Math.pow(1 + interestRate, numberOfPayments) - 1);
+            //round to two decimal places
             monthlyPayment = Math.round(monthlyPayment * 100);
             monthlyPayment /= 100;
             return monthlyPayment;

@@ -224,6 +224,7 @@ public class UserInterface {
                     break;
                 }
             }
+            //if no vehicle found with entered vin. Exit method
             if (foundVin == null) {
                 System.out.println("Vehicle not found");
                 return;
@@ -254,6 +255,7 @@ public class UserInterface {
                 int currentYear = LocalDateTime.now().getYear();
                 int vehicleAge = currentYear - foundVin.getYear();
 
+                //lease contracts only allowed for vehicles that are 3 years old or newer
                 if (vehicleAge > 3) {
                     System.out.println("Lease contracts cannot be for vehicles older than 3 years old.");
                     return;

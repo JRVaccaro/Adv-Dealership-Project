@@ -34,7 +34,7 @@ public class ContractDataManager {
 
             } else if (contract instanceof LeaseContract) {
                 LeaseContract lease = (LeaseContract) contract;
-                writer.write("LEASE|%s|%s|%s|%s|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%.2f\n".formatted(
+                writer.write("LEASE|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%.2f\n".formatted(
                         lease.getDate(),
                         lease.getCustomerName(),
                         lease.getCustomerEmail(),
